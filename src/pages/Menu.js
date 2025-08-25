@@ -9,12 +9,12 @@ function Menu() {
 
   // 🔹 Restaurants avec leurs images locales
   const localData = [
-    { restaurantID: 26, restaurantName: "Le Délice", imageUrl: "./images/Elegant Indian.jpeg" },
+    { restaurantID: 26, restaurantName: "Le Délice", imageUrl: "./images/d.jpeg" },
     { restaurantID: 25, restaurantName: "Pasta Roma", imageUrl: "./images/Carbonara Recipe.jpeg" },
     { restaurantID: 27, restaurantName: "Sushi Zen", imageUrl: "./images/Suchii.jpeg" },
     { restaurantID: 28, restaurantName: "Burger House", imageUrl: "./images/b.jpeg" },
-    { restaurantID: 29, restaurantName: "Le Gourmet Indien", imageUrl: "./images/Elegant Indian.jpeg" },
-    { restaurantID: 30, restaurantName: "La Mer", imageUrl: "./images/fruits de mer.jpeg" },
+    { restaurantID: 29, restaurantName: "Le Gourmet Indien", imageUrl: "./images/Elegant Indian .jpeg" },
+    { restaurantID: 30, restaurantName: "La Mer", imageUrl: "./images/fruits de mer .jpeg" },
     { restaurantID: 31, restaurantName: "Tacos Express", imageUrl: "./images/tacos.jpeg" },
     { restaurantID: 33, restaurantName: "Le Kebab Royal", imageUrl: "./images/kebda.jpeg" },
   ];
@@ -22,33 +22,37 @@ function Menu() {
   useEffect(() => {
     setLoading(true);
 
-    fetch('https://fakerestaurantapi.runasp.net/api/Restaurant?address=hyderabad&name=Paradise Biryani')
-      .then(res => res.json())
-      .then(data => {
+    fetch("https://fakerestaurantapi.runasp.net/api/Restaurant/5/menu")
+      .then((res) => res.json())
+      .then((data) => {
         console.log("API data:", data);
 
         if (!data || data.length === 0) {
           // 🔹 fallback si API vide
-          const fallback = localData.map(dish => ({
+          const fallback = localData.map((dish) => ({
             itemID: dish.restaurantID,
             itemName: dish.restaurantName,
             itemDescription: "Description du plat non disponible",
             itemPrice: Math.floor(Math.random() * 100) + 20,
             restaurantName: dish.restaurantName,
-            localImage: dish.imageUrl
+            localImage: dish.imageUrl,
           }));
           setFoods(fallback);
         } else {
           // 🔹 mapping API vers plats en utilisant image locale si possible
-          const mapped = data.map(item => {
-            const restaurant = localData.find(r => r.restaurantName === item.name);
+          const mapped = data.map((item) => {
+            const restaurant = localData.find(
+              (r) => r.restaurantName === item.name
+            );
             return {
               itemID: item.id || item.restaurantID,
               itemName: item.name,
               itemDescription: item.description || "Description non disponible",
               itemPrice: Math.floor(Math.random() * 100) + 50,
               restaurantName: item.name,
-              localImage: restaurant ? restaurant.imageUrl : "./images/default.jpeg"
+              localImage: restaurant
+                ? restaurant.imageUrl
+                : "./images/default.jpeg",
             };
           });
           setFoods(mapped);
@@ -56,16 +60,16 @@ function Menu() {
 
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         // 🔹 fallback sur erreur
-        const fallback = localData.map(dish => ({
+        const fallback = localData.map((dish) => ({
           itemID: dish.restaurantID,
           itemName: dish.restaurantName,
           itemDescription: "Description du plat non disponible",
           itemPrice: Math.floor(Math.random() * 100) + 20,
           restaurantName: dish.restaurantName,
-          localImage: dish.imageUrl
+          localImage: dish.imageUrl,
         }));
         setFoods(fallback);
         setLoading(false);

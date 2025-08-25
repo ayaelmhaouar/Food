@@ -7,6 +7,7 @@ function Restaurants() {
     // Exemple fetch (tu peux utiliser ça plus tard)
     fetch("https://fakerestaurantapi.runasp.net/api/Restaurant")
       .then((res) => res.json())
+
       .then((json) => console.log(json));
 
     // Données avec image
@@ -33,7 +34,7 @@ function Restaurants() {
         address: "78 Rue Tokyo",
         type: "Japonais",
         parkingLot: true,
-        imageUrl: "./images/r.",
+        imageUrl: "./images/r.png",
       },
       {
         restaurantID: 28,
@@ -77,7 +78,7 @@ function Restaurants() {
               padding: 15,
               borderRadius: 10,
               boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-              background: "#fff",
+              background: "#aa4c0aff",
             }}
           >
             <img

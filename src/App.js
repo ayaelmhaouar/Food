@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Accueil from "./pages/Accueil";
-
 import Restaurants from "./pages/Restaurants";
 import Menu from "./pages/Menu"; 
 import Cart from "./pages/Cart"; 
-
-
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,8 +37,6 @@ function App() {
           flexWrap: "wrap",
         }}
       >
-        
-
         {/* Liens menu */}
         <div
           style={{
@@ -55,19 +50,10 @@ function App() {
             gap: "10px",
           }}
         >
-          <Link to="/" style={linkStyle}>
-            Accueil
-          </Link>
-          <Link to="/restaurants" style={linkStyle}>
-            Restaurants
-          </Link>
-          <Link to="/Menu" style={linkStyle}>
-           Menu
-          </Link>
-          
-          <Link to="/panier" style={linkStyle}>
-            🛒 Panier
-          </Link>
+          <Link to="/" style={linkStyle}>Accueil</Link>
+          <Link to="/restaurants" style={linkStyle}>Restaurants</Link>
+          <Link to="/menu" style={linkStyle}>Menu</Link>
+          <Link to="/panier" style={linkStyle}>🛒 Panier</Link>
         </div>
 
         {/* Bouton mobile */}
@@ -91,10 +77,9 @@ function App() {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Accueil />} />
-        
         <Route path="/restaurants" element={<Restaurants />} />
-        <Route path="/restaurants/:id" element={<Menu />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/panier" element={<Cart />} />
       </Routes>
     </Router>
   );
